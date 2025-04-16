@@ -19,11 +19,9 @@ public class PlayerController : MonoBehaviour
     [Header("Transparency Settings")]
     [SerializeField] private float phasedAlpha = 0.5f;
 
-    // Components
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
-    // State
     private bool isGrounded;
     private bool isPhasing = false;
     private float phaseTimer = 0f;
@@ -112,22 +110,21 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("SolidObstacle"))
         {
-            TriggerGameOver("Hit Solid Obstacle");
+            TriggerGameOver();
         }
 
         if (other.CompareTag("PhaseableObstacle"))
         {
             if (!isPhasing)
             {
-                TriggerGameOver("Should have phased but jumped!");
+                TriggerGameOver();
             }
         }
     }
 
-    private void TriggerGameOver(string reason)
+    private void TriggerGameOver()
     {
-        Debug.Log("Game Over: " + reason);
-        Time.timeScale = 0;
+        GameManager.instance.RestartGame();
     }
 
 

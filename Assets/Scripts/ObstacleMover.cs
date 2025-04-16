@@ -12,6 +12,7 @@ public class ObstacleMover : MonoBehaviour
 
         if (transform.position.x < destroyXPosition)
         {
+            GameManager.instance.ChangeScore();
             Destroy(gameObject);
         }
     }
